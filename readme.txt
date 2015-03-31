@@ -86,6 +86,14 @@ BLANK_TIME=0
 POWERDOWN_TIME=0
 
 
+7-----------------
+We were having problems with the Pi losing internet connectivity overnight. We solved this by adding a cron job that reboots the Pi shortly before the building opens.
+#Command: crontab -e
+add 2 lines at the end specifying time and command to be run
+0 8 * * 1,2,3,4,5,6 sudo reboot
+0 12 * * 0 sudo reboot
+
+
 -------- Finished --------
 That's it! The Pi should now function as a digital display.
 
