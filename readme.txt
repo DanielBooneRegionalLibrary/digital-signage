@@ -5,7 +5,7 @@ This project uses a Raspberry Pi and a standard TV to create a digital display f
 
 1920 x 1080 images are placed into the slides folder of this project. 
 
-The Pi boots into a web browser with this site set as the home page. The page cycles through the images in the slides folder. The page refreshes once an hour, showing any new images and discarding old ones.
+The Pi boots into a web browser and navigates to this site. The page cycles through the images in the slides folder. The page refreshes once an hour, showing any new images and discarding old ones.
 
 
 
