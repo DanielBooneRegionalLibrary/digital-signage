@@ -1,3 +1,14 @@
+---------------------------------------
+Overview
+---------------------------------------
+This project uses a Raspberry Pi and a standard TV to create a digital display for the lobby of the Columbia Public Library.
+
+1920 x 1080 images are placed into the slides folder of this project. 
+
+The Pi boots into a web browser with this site set as the home page. The page cycles through the images in the slides folder. The page refreshes once an hour, showing any new images and discarding old ones.
+
+
+
 -----------------------------------------
 Using the website
 -----------------------------------------
@@ -15,9 +26,11 @@ The time intervals (between slides, between refreshes) can be set underneath the
 Raspberry Pi Setup for digital signage
 -----------------------------------------------
 
+
 1----------------
 # This assumes that you have a new Pi and are booting for the first time.
 Boot Raspberry Pi. On the raspi-config screen, choose "boot_behavior". Set the Pi to boot into the GUI by doing.....?
+
 
 2----------------
 If necessary, adjust the Raspberry Pi to fit onto your display. 
@@ -27,10 +40,12 @@ sudo nano /boot/config.txt
 There are a lot of settings in that file, most of which are pretty well labeled. You may have to play around until you find the right settings.
 There is a good article here about what does what: http://www.raspberrypi.org/documentation/configuration/config-txt.md
 
+
 3----------------
 Install Openbox and Midori. Openbox is the window manager we'll use and Midori is the browser.
 # Commands: 
 sudo apt-get install openbox obconf obmenu midori
+
 
 4----------------
 Configure Openbox to run Midori and navigate to the correct page.
@@ -44,11 +59,13 @@ sleep 5s && midori -e Fullscreen --app=/PATH/TO/HOMEPAGE/FILE.html
 Log out of the GUI by going to Menu > Shutdown > Logout
 On the login screen, choose Openbox from the list of window managers. Log back in and reboot. The Pi should now reboot into Openbox and load the web page at full screen.
 
+
 5----------------
 Hide the mouse cursor by installing unclutter 
 Right click anywhere on the screen to exit fullscreen. Right click anywhere on the desktop to open a terminal.
 # Command:
 sudo apt-get install unclutter
+
 
 6----------------
 Prevent the Pi from sleeping
