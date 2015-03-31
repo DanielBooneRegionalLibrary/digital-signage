@@ -94,6 +94,13 @@ add 2 lines at the end specifying time and command to be run
 0 12 * * 0 sudo reboot
 
 
+8----------------------
+The time on the Pi was off by about three hours, messing up the previous cron refreshes. I'm not sure why this was. To fix it:
+Double check that the time is correct in raspi-config
+Reset the clock with the command:
+sudo date -s "2 Apr 2015 10:18:00"
+Of course, use the current time and date
+
 -------- Finished --------
 That's it! The Pi should now function as a digital display.
 
