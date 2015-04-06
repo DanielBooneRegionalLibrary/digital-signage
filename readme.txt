@@ -29,7 +29,11 @@ Raspberry Pi Setup for digital signage
 
 1----------------
 # This assumes that you have a new Pi and are booting for the first time.
-Boot Raspberry Pi. On the raspi-config screen, choose "boot_behavior". Set the Pi to boot into the GUI by doing.....?
+Boot Raspberry Pi. 
+On the raspi-config screen, choose "boot_behavior". 
+Set the Pi to boot into the GUI by choosing "Enable boot to Desktop/Scratch"
+Choose "Desktop log in..." from the following screen.
+Note: if you overlook this step, you can get back to the raspi-config screen with the command: sudo raspi-config
 
 
 2----------------
