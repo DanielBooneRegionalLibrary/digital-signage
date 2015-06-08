@@ -129,3 +129,17 @@ Of course, use the current time and date
 That's it! The Pi should now function as a digital display.
 
 
+----------------------------------------------------------------------------------------------------
+Thoughts on future improvements
+----------------------------------------------------------------------------------------------------
+
+This was largely done as a proof of concept to be presented to the higher-ups. 
+As such, it's minimally functional. 
+Following are some thoughts on direction for a production version.
+
+- Prettier transitions between slides. Fade effects, images sliding off the page, etc.
+- Updating the slides via AJAX instead of on a page refresh. 
+- Including a live list of upcoming library events in place of one or all slides.
+  This should be easily doable if using AJAX to update slides. 
+
+
