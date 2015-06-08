@@ -3,6 +3,9 @@ Overview
 ---------------------------------------
 This project uses a Raspberry Pi and a standard TV to create a digital display for the lobby of the Columbia Public Library.
 
+*Note: I have since abandoned the Raspberry Pi due to issues with the Pi lacking an internal clock and not getting correct times from the server. 
+       This project should work with an Ubuntu installation though. However, that configuration has not been thoroughly tested yet.
+	
 1920 x 1080 images are placed into the slides folder of this project. 
 
 The Pi boots into a web browser and navigates to this site. The page cycles through the images in the slides folder. The page refreshes once an hour, showing any new images and discarding old ones.
@@ -28,6 +31,9 @@ Raspberry Pi Setup for digital signage
 
 
 1----------------
+
+*Note: The settings to automatically log into Ubuntu are well documented on the web. It is typically done through the GUI.
+
 # This assumes that you have a new Pi and are booting for the first time.
 Boot Raspberry Pi. 
 On the raspi-config screen, choose "boot_behavior". 
@@ -37,6 +43,9 @@ Note: if you overlook this step, you can get back to the raspi-config screen wit
 
 
 2----------------
+
+*Note if using Ubuntu, skip to step 3
+
 If necessary, adjust the Raspberry Pi to fit onto your display. 
 Command:
 sudo nano /boot/config.txt
@@ -61,7 +70,7 @@ If there is anything in the autostart file that isn't commented out, comment it 
 sleep 5s && midori -e Fullscreen --app=/PATH/TO/HOMEPAGE/FILE.html
 
 Log out of the GUI by going to Menu > Shutdown > Logout
-On the login screen, choose Openbox from the list of window managers. Log back in and reboot. The Pi should now reboot into Openbox and load the web page at full screen.
+On the login screen, choose Openbox from the list of window managers. Log back in and reboot. The computer should now reboot into Openbox and load the web page at full screen.
 
 
 5----------------
@@ -72,6 +81,9 @@ sudo apt-get install unclutter
 
 
 6----------------
+
+*Note: Preventing Ubuntu from sleeping is also well documented on the web. It is typically done through the GUI.
+
 Prevent the Pi from sleeping
 # Command:
 sudo nano /etc/lightdm/lightdm.conf
@@ -89,8 +101,16 @@ edit these values to:
 BLANK_TIME=0
 POWERDOWN_TIME=0
 
-
 7-----------------
+Use a cronjob to update and reboot Overnight
+# Command sudo crontab -e
+add a line at the end specifying time and command to be run
+0 1 * * * apt-get update && apt-get dist-upgrade -y && reboot
+
+If you're using Ubuntu, you're done. If you're using a Pi, continue on to read about fixes we tried for the aforementioned clock issues. 
+
+
+8-----------------
 We were having problems with the Pi losing internet connectivity overnight. We solved this by adding a cron job that reboots the Pi shortly before the building opens.
 #Command: crontab -e
 add 2 lines at the end specifying time and command to be run
@@ -98,7 +118,7 @@ add 2 lines at the end specifying time and command to be run
 0 12 * * 0 sudo reboot
 
 
-8----------------------
+9----------------------
 The time on the Pi was off by about three hours, messing up the previous cron refreshes. I'm not sure why this was. To fix it:
 Double check that the time is correct in raspi-config
 Reset the clock with the command:
