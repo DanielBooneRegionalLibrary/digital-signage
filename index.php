@@ -27,7 +27,9 @@ if ($handle = opendir('slides')) {
     </head>
     <body id="page">
         <img id="replace" src="slides/<?php echo $slides[0]; ?>" >
-        <img id="next" style="display: none; " src="slides/<?php echo $slides[1]; ?>" >
+        <img id="next" style="display: none; " src="slides/<?php 
+		// load the first slide in the slides folder
+		echo $slides[1]; ?>" >
         
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -38,33 +40,34 @@ if ($handle = opendir('slides')) {
             slideCounter = 0,
             slideTimer;
 
-        //insert file names here
         <?php 
+		// this pushes the PHP slides array into the jQuery slides array
         for ($i = 0; $i < count($slides); $i++){
             echo "slides.push(\"$slides[$i]\");";
         }
         ?>
-        //console.log(numberOfSlides);
         
-        
-        // set times here
+        // this sets the times for displaying each slide, and for the page refresh which gets new slides and discards old ones
+		// the refreshInterval is an approximation of how long inbetween refreshes
+		// slideCycles calculates the number of times the program will have to cycle through slides so that it can refresh between the last slide and the first
+		// refreshCountdown counts down the number of slides before refreshing the page
         var refreshInterval = 3600000, // one hour
-            slideChangeInterval = 15000,
+            slideChangeInterval = 15000, // every 15 seconds
             numberOfSlides = slides.length,
             slideCycles = Math.ceil( refreshInterval / (numberOfSlides * slideChangeInterval) ),
             refreshCountdown = slideCycles * numberOfSlides;
-        //console.log(slideCycles);
         
         function changeSlide(){
+			// increments the slidesCounter used below or resets it to 0 if it's longer than the slides array
             if (slideCounter >= numberOfSlides - 1){
                 slideCounter = 0;
             } else {
                 slideCounter++;
             }
-            //console.log(slideCounter);
             
             refreshCountdown--;
-            //console.log(refreshCountdown);
+			
+			// If it's time to refresh the page, refresh. If it's not time yet, load the next slide.
             if (refreshCountdown <= 0){
                 location.reload();
             } else {
@@ -76,7 +79,8 @@ if ($handle = opendir('slides')) {
                 }
             }
         }
-
+		
+		// calls changeSlide() based on the slideChangeInterval set above
         setInterval(function(){
             changeSlide();
         }, slideChangeInterval);
